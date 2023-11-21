@@ -8,4 +8,5 @@ public class Endpoints {
 
     public static final String BOARDS_ENDPOINT = "boards/";
     public static final String LISTS_ENDPOINT = "lists/";
+    public static final String CARDS_ENDPOINT = "/cards";
 }

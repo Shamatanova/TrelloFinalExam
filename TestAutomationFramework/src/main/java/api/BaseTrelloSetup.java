@@ -14,9 +14,6 @@ import org.junit.jupiter.api.Assertions;
 import java.util.List;
 
 public class BaseTrelloSetup {
-
-
-
     private RequestSpecification getRestAssured() {
         return given()
                 .contentType(ContentType.JSON)
@@ -73,20 +70,32 @@ public class BaseTrelloSetup {
     public Response createCard(String listId, String name) {
         return getRestAssured()
                 .when()
-                .queryParam("name", name)
                 .queryParam("idList", listId)
-                .post("/cards")
+                .queryParam("name", name)
+                .post(CARDS_ENDPOINT)
                 .then()
                 .extract()
                 .response();
     }
 
-    // API: Create 2 lists
+    public Response moveCardBetweenTwoLists(String cardId, String toListId) {
+        return getRestAssured()
+                .when()
+                .queryParam("idList", toListId)
+                .put(CARDS_ENDPOINT + "/" + cardId)
+                .then()
+                .extract()
+                .response();
+    }
 
-//    public List<Response> listOfBoards(int numberOfBoards){
-//
-//    }
-    // API: Create a card
+    public Response getBoard(String boardId){
+        return getRestAssured()
+                .when()
+                .get(BOARDS_ENDPOINT + boardId)
+                .then()
+                .extract()
+                .response();
+    }
 
     //################## Assertions #######################
 
