@@ -1,34 +1,20 @@
 package pages.trello;
 
+import com.telerikacademy.testframework.pages.BasePage;
 import org.openqa.selenium.WebDriver;
 
+import static com.telerikacademy.testframework.Utils.getConfigPropertyByKey;
 import static com.telerikacademy.testframework.Utils.getUIMappingByKey;
+import static pages.trello.Constants.*;
 
-public class BoardsPage extends BaseTrelloPage {
-
+public class BoardsPage extends BasePage {
     public BoardsPage(WebDriver driver) {
-        super(driver, "trello.boardsPage");
+        super(driver, BOARDS_PAGE);
     }
 
-    public void createBoard() {
-
-        String boardName = getUIMappingByKey("trello.boardName");
-
-        actions.waitForElementClickable("trello.header.create.menuButton");
-        actions.clickElement("trello.header.create.menuButton");
-
-        actions.waitForElementClickable("trello.header.createBoard.dropDownButton");
-        actions.clickElement("trello.header.createBoard.dropDownButton");
-
-        actions.waitForElementClickable("trello.createBoard.titleInput");
-        actions.typeValueInField(boardName, "trello.createBoard.titleInput");
-
-        actions.waitForElementClickable("trello.create.board.submitButton");
-        actions.clickElement("trello.create.board.submitButton");
-    }
-
-    public void clickOnBoard(String boardName) {
-        actions.waitForElementVisible("trello.boardsPage.boardByTeamAndName");
-        actions.clickElement("trello.boardsPage.boardByTeamAndName", boardName);
+    public void assertNavigated(){
+        var pageUrl = getConfigPropertyByKey(BASE_URL) + String.format(getConfigPropertyByKey(BOARDS_PAGE), getConfigPropertyByKey(USER_NAME));
+        actions.waitForElementClickable(ACCOUNT_BUTTON);
+        actions.assertUrlsAreEquals(pageUrl, driver.getCurrentUrl());
     }
 }

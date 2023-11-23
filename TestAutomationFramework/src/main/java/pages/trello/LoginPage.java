@@ -1,36 +1,28 @@
 package pages.trello;
 
+import com.telerikacademy.testframework.pages.BasePage;
 import org.openqa.selenium.WebDriver;
 
 import static com.telerikacademy.testframework.Utils.getConfigPropertyByKey;
+import static pages.trello.Constants.*;
 
-public class LoginPage extends BaseTrelloPage {
-
-    public static String boardId = null;
-
+public class LoginPage extends BasePage {
     public LoginPage(WebDriver driver) {
-        super(driver, "trello.loginPage");
+        super(driver, LOGIN_PAGE);
     }
 
-    public void loginUser(String userKey) {
-        String username = getConfigPropertyByKey("trello.users." + userKey + ".username");
-        String password = getConfigPropertyByKey("trello.users." + userKey + ".password");
+    public void loginUser(String username, String password) {
 
-        navigateToPage();
-        assertPageNavigated();
+        actions.waitForElementClickable(USERNAME_FIELD);
+        actions.clearValueInField(USERNAME_FIELD);
+        actions.typeValueInField(getConfigPropertyByKey(username), USERNAME_FIELD);
+        actions.waitForElementClickable(SUBMIT_BUTTON);
+        actions.clickElement(SUBMIT_BUTTON);
 
-        actions.waitForElementVisible("trello.loginPage.username");
-
-        actions.typeValueInField(username, "trello.loginPage.username");
-        actions.waitForElementVisible("trello.loginPage.loginButton");
-        actions.clickElement("trello.loginPage.loginButton");
-
-        actions.waitForElementClickable("trello.loginPage.loginSubmitButton");
-        actions.waitForElementClickable("trello.loginPage.password");
-
-        actions.typeValueInField(password, "trello.loginPage.password");
-        actions.clickElement("trello.loginPage.loginSubmitButton");
-
-        actions.waitForElementVisible("trello.header.member.menuButton");
+        actions.waitForElementClickable(PASSWORD_FIELD);
+        actions.clearValueInField(PASSWORD_FIELD);
+        actions.typeValueInField(getConfigPropertyByKey(password), PASSWORD_FIELD);
+        actions.waitForElementClickable(LOGIN_BUTTON_LOGIN_PAGE);
+        actions.clickElement(LOGIN_BUTTON_LOGIN_PAGE);
     }
 }

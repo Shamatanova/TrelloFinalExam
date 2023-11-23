@@ -1,13 +1,12 @@
 package test.cases.trello;
 
-import api.BaseTrelloSetup;
+import api.trello.BaseTrelloSetup;
 import api.trello.models.BoardModel;
 import api.trello.models.CardModel;
 import api.trello.models.ListModel;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static api.trello.utils.Constants.*;

@@ -1,38 +1,23 @@
 package test.cases.trello;
 
-import api.BaseTrelloSetup;
-import io.restassured.response.Response;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import pages.trello.BoardPage;
-import pages.trello.BoardsPage;
+
+import static pages.trello.Constants.*;
 
 public class TrelloSeleniumTests extends BaseTest{
-    private BaseTrelloSetup trelloApi = new BaseTrelloSetup();
-    private Response createdBoard;
-
-//    @BeforeEach
-//    public void beforeTest(){
-//        createdBoard = trelloApi.createBoard("Board Name from API", "Description");
-//    }
-//
-//    @AfterEach
-//    public void afterTest(){
-//        var deletionResponse = trelloApi.deleteBoard(String.valueOf(createdBoard));
-//    }
 
     @Test
+    public void when_LoginWithValidUsernameAndValidPassword_expect_SuccessfullyLoginUser() {
+        unauthenticatedPage.clickLogInButton();
+        loginPage.loginUser(USERNAME, PASSWORD);
+
+        boardsPage.assertNavigated();
+    }
+    @Test
     public void createBoardWhenCreateBoardClicked() {
-        login();
-
-        BoardsPage boardsPage = new BoardsPage(actions.getDriver());
-        boardsPage.createBoard();
-
-
-        BoardPage boardPage = new BoardPage(actions.getDriver());
-        boardPage.assertAddListExists();
-
-        // API: Delete board
+        unauthenticatedPage.clickLogInButton();
+        loginPage.loginUser(USERNAME, PASSWORD);
     }
 
     @Test

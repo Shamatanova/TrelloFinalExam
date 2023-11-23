@@ -1,4 +1,4 @@
-package api;
+package api.trello;
 
 import com.telerikacademy.testframework.PropertiesManager;
 

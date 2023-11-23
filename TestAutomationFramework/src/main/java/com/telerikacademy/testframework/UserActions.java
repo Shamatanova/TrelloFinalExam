@@ -46,6 +46,12 @@ public class UserActions {
         element.click();
     }
 
+    public void clearValueInField(String field, Object... fieldArguments) {
+        String locator = getLocatorValueByKey(field, fieldArguments);
+        WebElement element = driver.findElement(By.xpath(locator));
+        element.clear();
+    }
+
     public void typeValueInField(String value, String field, Object... fieldArguments) {
         String locator = getLocatorValueByKey(field, fieldArguments);
         WebElement element = driver.findElement(By.xpath(locator));
@@ -69,7 +75,17 @@ public class UserActions {
         dragAndDrop.perform();
     }
 
+    private String getLocatorValueByKey(String locator) {
+        return format(getUIMappingByKey(locator));
+    }
+
+    private String getLocatorValueByKey(String locator, Object[] arguments) {
+        return format(getUIMappingByKey(locator), arguments);
+    }
+
+
     //############# WAITS #########
+
     public void waitForElementVisible(String locatorKey, Object... arguments) {
         int defaultTimeout = Integer.parseInt(getConfigPropertyByKey("config.defaultTimeoutSeconds"));
 
@@ -82,7 +98,6 @@ public class UserActions {
         waitForElementToBeClickableUntilTimeout(locatorKey, defaultTimeout, arguments);
     }
 
-    //############# WAITS #########
     public void waitForElementPresent(String locator, Object... arguments) {
         // TODO: Implement the method
         // 1. Initialize Wait utility with default timeout from properties
@@ -90,30 +105,6 @@ public class UserActions {
         // 2. Use the method that checks for Element present
         // 3. Fail the test with meaningful error message in case the element is not present
         waitForElementPresenceUntilTimeout(locator, defaultTimeout, arguments);
-    }
-
-    public void assertElementPresent(String locator) {
-        Assertions.assertNotNull(driver.findElement(By.xpath(getUIMappingByKey(locator))),
-                format("Element with %s doesn't present.", locator));
-    }
-
-    public void assertElementAttribute(String locator, String attributeName, String attributeValue) {
-        // TODO: Implement the method
-        // 1. Find Element using the locator value from Properties
-        String xpath = getLocatorValueByKey(locator);
-        WebElement element = driver.findElement(By.xpath(xpath));
-        // 2. Get the element attribute
-        String value = element.getAttribute(attributeName);
-        // 3. Assert equality with expected value
-        Assertions.assertEquals(getLocatorValueByKey(attributeValue), value, format("Element with locator %s doesn't match", attributeName));
-    }
-
-    private String getLocatorValueByKey(String locator) {
-        return format(getUIMappingByKey(locator));
-    }
-
-    private String getLocatorValueByKey(String locator, Object[] arguments) {
-        return format(getUIMappingByKey(locator), arguments);
     }
 
     private void waitForElementVisibleUntilTimeout(String locator, int seconds, Object... locatorArguments) {
@@ -136,6 +127,30 @@ public class UserActions {
         } catch (Exception exception) {
             Assertions.fail("Element with locator: '" + xpath + "' was not found.");
         }
+    }
+
+
+    //############# Asserts #########
+
+    public void assertElementPresent(String locator) {
+        Assertions.assertNotNull(driver.findElement(By.xpath(getUIMappingByKey(locator))),
+                format("Element with %s doesn't present.", locator));
+    }
+
+    public void assertElementAttribute(String locator, String attributeName, String attributeValue) {
+        // TODO: Implement the method
+        // 1. Find Element using the locator value from Properties
+        String xpath = getLocatorValueByKey(locator);
+        WebElement element = driver.findElement(By.xpath(xpath));
+        // 2. Get the element attribute
+        String value = element.getAttribute(attributeName);
+        // 3. Assert equality with expected value
+        Assertions.assertEquals(getLocatorValueByKey(attributeValue), value, format("Element with locator %s doesn't match", attributeName));
+    }
+
+    public void assertUrlsAreEquals(String expectedUrl, String actualUrl) {
+        Assertions.assertEquals(expectedUrl, actualUrl, "Expected URL is different than actual.");
+        System.out.println("URLs are equal.");
     }
 
     private void waitForElementPresenceUntilTimeout(String locator, int seconds, Object... locatorArguments) {
