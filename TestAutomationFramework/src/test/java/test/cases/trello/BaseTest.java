@@ -1,5 +1,6 @@
 package test.cases.trello;
 
+import pages.trello.BoardPage;
 import pages.trello.BoardsPage;
 import pages.trello.LoginPage;
 import pages.trello.UnauthenticatedPage;
@@ -14,7 +15,7 @@ public class BaseTest {
 
     UserActions actions;
     BoardsPage boardsPage;
-   // BoardPage boardPage;
+    BoardPage boardPage;
     LoginPage loginPage;
     UnauthenticatedPage unauthenticatedPage;
 
@@ -23,7 +24,7 @@ public class BaseTest {
         actions = new UserActions();
 
         boardsPage = new BoardsPage(actions.getDriver());
-       // boardPage = new BoardPage(actions.getDriver());
+        boardPage = new BoardPage(actions.getDriver());
         loginPage = new LoginPage(actions.getDriver());
         unauthenticatedPage = new UnauthenticatedPage(actions.getDriver());
 

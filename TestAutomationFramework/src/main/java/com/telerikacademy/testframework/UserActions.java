@@ -137,6 +137,12 @@ public class UserActions {
                 format("Element with %s doesn't present.", locator));
     }
 
+    public void assertElementPresent(String locator, Object... fieldArguments) {
+        String fullLocator = getLocatorValueByKey(locator, fieldArguments);
+        Assertions.assertNotNull(driver.findElement(By.xpath(getUIMappingByKey(fullLocator))),
+                format("Element with %s doesn't present.", locator));
+    }
+
     public void assertElementAttribute(String locator, String attributeName, String attributeValue) {
         // TODO: Implement the method
         // 1. Find Element using the locator value from Properties

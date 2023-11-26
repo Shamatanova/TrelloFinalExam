@@ -13,11 +13,15 @@ public class TrelloSeleniumTests extends BaseTest{
         loginPage.loginUser(USERNAME, PASSWORD);
 
         boardsPage.assertNavigated();
+        boardsPage.assertWorkspacesTitleIsVisible();
     }
     @Test
-    public void createBoardWhenCreateBoardClicked() {
+    public void when_CreateNewBoardWithValidTitle_expect_SuccessfullyCreatedNewBoard() {
         unauthenticatedPage.clickLogInButton();
         loginPage.loginUser(USERNAME, PASSWORD);
+
+        boardsPage.clickCreateBoardButton(NEW_BOARD_TITLE);
+        boardPage.assertCurrentTitleIsCreated(NEW_BOARD_TITLE);
     }
 
     @Test
