@@ -29,6 +29,8 @@ public class BaseTest {
         unauthenticatedPage = new UnauthenticatedPage(actions.getDriver());
 
         UserActions.loadBrowser(BASE_URL);
+        unauthenticatedPage.clickLogInButton();
+        loginPage.loginUser(USERNAME, PASSWORD);
     }
 
     @AfterAll

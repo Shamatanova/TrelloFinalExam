@@ -58,6 +58,13 @@ public class UserActions {
         element.sendKeys(value);
     }
 
+    public String getText(String key, Object... arguments){
+        String locator = getLocatorValueByKey(key, arguments);
+
+        WebElement element = driver.findElement(By.xpath(locator));
+        return element.getText();
+    }
+
     public void dragAndDropElement(String fromElementLocator, String toElementLocator) {
 
         String fromLocator = getLocatorValueByKey(fromElementLocator);
@@ -129,6 +136,16 @@ public class UserActions {
         }
     }
 
+    private void waitForElementPresenceUntilTimeout(String locator, int seconds, Object... locatorArguments) {
+        Duration timeout = Duration.ofSeconds(seconds);
+        WebDriverWait wait = new WebDriverWait(driver, timeout);
+        String xpath = getLocatorValueByKey(locator, locatorArguments);
+        try {
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpath)));
+        } catch (Exception exception) {
+            Assertions.fail("Element with locator: '" + xpath + "' was not found.");
+        }
+    }
 
     //############# Asserts #########
 
@@ -154,19 +171,8 @@ public class UserActions {
         Assertions.assertEquals(getLocatorValueByKey(attributeValue), value, format("Element with locator %s doesn't match", attributeName));
     }
 
-    public void assertUrlsAreEquals(String expectedUrl, String actualUrl) {
-        Assertions.assertEquals(expectedUrl, actualUrl, "Expected URL is different than actual.");
-        System.out.println("URLs are equal.");
-    }
-
-    private void waitForElementPresenceUntilTimeout(String locator, int seconds, Object... locatorArguments) {
-        Duration timeout = Duration.ofSeconds(seconds);
-        WebDriverWait wait = new WebDriverWait(driver, timeout);
-        String xpath = getLocatorValueByKey(locator, locatorArguments);
-        try {
-            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpath)));
-        } catch (Exception exception) {
-            Assertions.fail("Element with locator: '" + xpath + "' was not found.");
-        }
+    public void assertEquals(String expected, String actual) {
+        Assertions.assertEquals(expected, actual, "Expected String is different than actual.");
+        System.out.println("Strings are equal.");
     }
 }
