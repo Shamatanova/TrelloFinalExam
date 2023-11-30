@@ -9,6 +9,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
+import java.util.List;
 
 import static com.telerikacademy.testframework.Utils.LOGGER;
 import static com.telerikacademy.testframework.Utils.getConfigPropertyByKey;
@@ -90,6 +91,10 @@ public class UserActions {
         return format(getUIMappingByKey(locator), arguments);
     }
 
+    public List<WebElement> getElements(String key, Object... arguments){
+        String locator = getLocatorValueByKey(key, arguments);
+        return driver.findElements(By.xpath(locator));
+    }
 
     //############# WAITS #########
 

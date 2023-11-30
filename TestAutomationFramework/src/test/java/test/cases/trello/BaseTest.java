@@ -37,9 +37,4 @@ public class BaseTest {
     public static void tearDown() {
         UserActions.quitDriver();
     }
-
-
-    //public void login() {
-
-   // }
 }

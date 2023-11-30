@@ -34,8 +34,15 @@ public class Constants {
     public static final String BOARD_CLOSE_BUTTON = "trello.boardPage.boardMenuButton.closeBoard.closeButton";
     public static final String REOPEN_BOARD_BUTTON = "trello.boardPage.closedBoard.reopenBoardButton";
     public static final String CLOSE_BOARD_MESSAGE = "trello.boardPage.closedBoard.closeBoardMessage";
+    public static final String CREATE_LIST_BUTTON = "trello.boardPage.addList.button";
+    public static final String CREATE_LIST_FORM = "trello.boardPage.addList.form";
+    public static final String TITLE_LIST_FIELD = "trello.boardPage.addListButton.titleField";
+    public static final String ADD_LIST_BUTTON = "trello.boardPage.addListButton.addListButton";
+    public static final String ALL_LISTS = "trello.boardPage.allLists";
 
 
     public static final String NEW_BOARD_TITLE = "New board title";
+    public static final String NEW_LIST_TITLE = "New list title";
+    public static final String NEW_CARD_TITLE = "New card title";
     public static final String CLOSED_MESSAGE = " is closed.";
 }

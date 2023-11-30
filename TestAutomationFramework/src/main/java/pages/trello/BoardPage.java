@@ -3,11 +3,22 @@ package pages.trello;
 import com.telerikacademy.testframework.pages.BasePage;
 import org.openqa.selenium.WebDriver;
 
+import static com.telerikacademy.testframework.Utils.getConfigPropertyByKey;
 import static pages.trello.Constants.*;
 
 public class BoardPage extends BasePage {
     public BoardPage(WebDriver driver) {
         super(driver, BOARD_PAGE);
+    }
+
+    public void createNewList(String listTitle){
+        actions.waitForElementClickable(CREATE_LIST_FORM);
+        actions.typeValueInField(listTitle,getConfigPropertyByKey(TITLE_LIST_FIELD));
+        actions.clickElement(ADD_LIST_BUTTON);
+    }
+
+    public void createNewCard(String cardTitle){
+        var lists = actions.getElements(ALL_LISTS);
     }
 
     public void deleteBoard(String boardTitle){
@@ -43,5 +54,9 @@ public class BoardPage extends BasePage {
         var actualMessage = actions.getText(CLOSE_BOARD_MESSAGE);
         var expectedMessage = boardName + CLOSED_MESSAGE;
         actions.assertEquals(expectedMessage, actualMessage);
+    }
+
+    public void assertListIsVisible(String listName, String locator){
+        actions.getElements(locator);
     }
 }
