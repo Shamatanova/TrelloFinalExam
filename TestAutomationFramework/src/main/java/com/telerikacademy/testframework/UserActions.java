@@ -96,6 +96,11 @@ public class UserActions {
         return driver.findElements(By.xpath(locator));
     }
 
+    public WebElement getElement(String key, Object... arguments){
+        String locator = getLocatorValueByKey(key, arguments);
+        return driver.findElement(By.xpath(locator));
+    }
+
     //############# WAITS #########
 
     public void waitForElementVisible(String locatorKey, Object... arguments) {

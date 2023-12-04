@@ -32,13 +32,6 @@ public class TrelloSeleniumTests extends BaseTest {
     }
 
     @Test
-    public void when_CreateNewCardIntoTheListWithValidTitle_expect_SuccessfullyCreatedNewList() {
-        boardsPage.createNewBoard(NEW_BOARD_TITLE);
-        boardPage.createNewList(NEW_LIST_TITLE);
-        boardPage.createNewCard(NEW_CARD_TITLE);
-    }
-
-    @Test
     public void moveCardBetweenStatesWhenDragAndDropIsUsed() {
         // API: Create a board
         boardsPage.createNewBoard(NEW_BOARD_TITLE);

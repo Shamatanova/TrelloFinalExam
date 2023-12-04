@@ -28,17 +28,18 @@ public class Constants {
     public static final String INPUT_BOARD_TITLE = "trello.boardsPage.createBoardMenu.boardTitle";
     public static final String CREATE_BUTTON = "trello.boardsPage.createBoardMenu.createBoardButton";
     public static final String ALL_BOARDS_TITLES = "trello.boardPage.allBoardsTitles";
+    public static final String YOUR_BOARDS_LIST = "trello.boardPage.yourBoardsList";
     public static final String CURRENT_BOARD_TITLE = "trello.boardPage.yourBoardsTitles.currentTitle";
     public static final String BOARD_MENU_OPTIONS_BUTTON = "trello.boardPage.boardMenuButton";
     public static final String BOARD_MENU_CLOSE_BOARD_BUTTON = "trello.boardPage.boardMenuButton.closeBoard";
     public static final String BOARD_CLOSE_BUTTON = "trello.boardPage.boardMenuButton.closeBoard.closeButton";
     public static final String REOPEN_BOARD_BUTTON = "trello.boardPage.closedBoard.reopenBoardButton";
     public static final String CLOSE_BOARD_MESSAGE = "trello.boardPage.closedBoard.closeBoardMessage";
-    public static final String CREATE_LIST_BUTTON = "trello.boardPage.addList.button";
-    public static final String CREATE_LIST_FORM = "trello.boardPage.addList.form";
-    public static final String TITLE_LIST_FIELD = "trello.boardPage.addListButton.titleField";
+    public static final String LAST_TITLE_LIST_FIELD = "trello.boardPage.addListButton.titleFieldLast";
     public static final String ADD_LIST_BUTTON = "trello.boardPage.addListButton.addListButton";
+    public static final String ADD_ANOTHER_LIST_BUTTON = "trello.boardPage.addAnotherList.button";
     public static final String ALL_LISTS = "trello.boardPage.allLists";
+    public static final String ADD_ANOTHER_LIST_BUTTON_NEW = "trello.boardPage.addAnotherListButton";
 
 
     public static final String NEW_BOARD_TITLE = "New board title";
