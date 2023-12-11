@@ -6,4 +6,5 @@ public class BoardModel {
     public String desc;
     public String url;
     public String shortUrl;
+    public PrefsModel prefs;
 }

@@ -3,6 +3,7 @@ package test.cases.trello;
 import api.trello.BaseTrelloSetup;
 import api.trello.models.BoardModel;
 import api.trello.models.CardModel;
+import api.trello.models.LabelModel;
 import api.trello.models.ListModel;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.AfterEach;
@@ -86,5 +87,36 @@ public class TrelloAPITests {
 
         trelloApi.assertStatusCode200(updateCard.statusCode());
         trelloApi.assertElementsAreEquals(secondListModel.id, updateCardModel.idList);
+    }
+
+    @Test
+    public void when_updateBoardBackgroundWithAnotherColor_expect_SuccessfullyChangedTheColor(){
+        var newBoardModel = createdBoard.as(BoardModel.class);
+        NEW_BOARD_ID = newBoardModel.id;
+
+        var board = trelloApi.updateBackgroundColor(NEW_BOARD_ID, PINK_COLOR);
+        var boardModel = board.as(BoardModel.class);
+
+        trelloApi.assertStatusCode200(board.statusCode());
+        trelloApi.assertElementsAreEquals(PINK_COLOR, boardModel.prefs.background);
+    }
+
+    @Test
+    public void when_addNewLabelOnTheLabelList_expect_SuccessfullyAddInTheLabelList(){
+        var newBoardModel = createdBoard.as(BoardModel.class);
+        NEW_BOARD_ID = newBoardModel.id;
+        var firstList = trelloApi.createList(NEW_BOARD_ID, FIRST_LIST_NAME);
+        var firstListModel = firstList.as(ListModel.class);
+        FIRST_LIST_ID = firstListModel.id;
+        var card = trelloApi.createCard(FIRST_LIST_ID,CARD_NAME);
+        var cardModel = card.as(CardModel.class);
+        NEW_CARD_ID = cardModel.id;
+        var label = trelloApi.createNewLabel(LABEL_NAME, PINK_COLOR);
+        var labelModel = label.as(LabelModel.class);
+
+        trelloApi.assertStatusCode200(label.statusCode());
+        trelloApi.assertElementsAreEquals(LABEL_NAME, labelModel.name);
+        trelloApi.assertElementsAreEquals(PINK_COLOR, labelModel.color);
+        LABEL_ID = labelModel.id;
     }
 }

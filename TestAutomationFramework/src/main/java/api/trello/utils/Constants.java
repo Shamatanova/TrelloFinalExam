@@ -7,7 +7,11 @@ public class Constants {
     public static String NEW_BOARD_ID;
     public static String FIRST_LIST_ID;
     public static String SECOND_LIST_ID;
+    public static String NEW_CARD_ID;
+    public static String LABEL_ID;
     public static String FIRST_LIST_NAME = "My first list";
     public static String SECOND_LIST_NAME = "My second list";
     public static String CARD_NAME = "New Card";
+    public static String LABEL_NAME = "My first label";
+    public static String PINK_COLOR = "pink";
 }

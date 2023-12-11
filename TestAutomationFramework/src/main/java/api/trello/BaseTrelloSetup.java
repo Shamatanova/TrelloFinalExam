@@ -2,7 +2,10 @@ package api.trello;
 
 import com.telerikacademy.testframework.PropertiesManager;
 
+import static api.trello.utils.Constants.NEW_BOARD_ID;
+import static api.trello.utils.Constants.PINK_COLOR;
 import static api.trello.utils.Endpoints.*;
+import static io.restassured.RestAssured.get;
 import static io.restassured.RestAssured.given;
 import static org.apache.http.HttpStatus.*;
 
@@ -92,6 +95,26 @@ public class BaseTrelloSetup {
         return getRestAssured()
                 .when()
                 .get(BOARDS_ENDPOINT + boardId)
+                .then()
+                .extract()
+                .response();
+    }
+
+    public Response updateBackgroundColor(String boardId, String color){
+        return getRestAssured()
+                .queryParam("prefs/background", color)
+                .when()
+                .put(BOARDS_ENDPOINT + boardId)
+                .then()
+                .extract()
+                .response();
+    }
+
+    public Response createNewLabel(String labelName, String color){
+        return getRestAssured()
+                .queryParam("name", labelName)
+                .queryParam("color", color)
+                .post(BOARDS_ENDPOINT + NEW_BOARD_ID + LABELS_ENDPOINT)
                 .then()
                 .extract()
                 .response();
